@@ -29,15 +29,11 @@ class Cyberkey {
   */
   private $code;
 
-  /**
-  * @var string When results from curl will come, you can get them here
-  */
-  public $result = null;
-
-  function __construct($client_id, $secret_key) {
+  function __construct($client_id, $secret_key, $redirect_url) {
     $this->client_id = $client_id;
     $this->secret_key = $secret_key;
-    $this->code = $_GET['code'];
+    $this->redirect_url = $redirect_url;
+    $this->code = isset($_GET['code']) ? $_GET['code'] : null;
   }
 
   public function send_code() {
@@ -49,30 +45,29 @@ class Cyberkey {
     );
     
     try {
+      if (!$this->code) {
+        throw new Exception('Session timeout');
+      }
+  
       $curl = new \Curl\Curl();
       $curl->setHeader('Authorization', 'Basic '.$token);
       $curl->setHeader('Content-Type', 'application/x-www-form-urlencoded');
       $curl->post("https://production-api.cyberuskey.com/api/v2/tokens", $code_data);
       
       if ($curl->error) {
-        var_dump($curl->error);
-        throw new Exception('Error code: '.$curl->getErrorCode().' Message:'.$curl->getErrorMessage());
+        throw new Exception('Error code: '.$curl->error_code.' Message:'.$curl->error_message);
       } 
       
       $response = $curl->response;
       $id_token = json_decode($response)->id_token;
       $result = JWT::decode($id_token, self::$public_key, array('RS256'));
-      
-      $this->result = $result;
-      
-      return true;
+
+      return $result;
+
     } catch(Exception $e) {
         print($e->getMessage());
+
+        return false;
     }
-  
-    // if ((get_site_url() != $decoded->iss) || 
-    //     ($nonce[1] != $decoded->nonce)) {
-    //   throw new Exception('Error: Wrong authentication token');
-    // }
   }
  }

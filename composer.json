@@ -1,4 +1,18 @@
-{
+{    
+    "name": "cyberuslabs/cyberkey",
+    "type": "library",
+    "description": "Server side PHP library to integrate your system with Cybeurs Key easily",
+    "keywords": ["php","cuberlabs","cyberkey","eliot pro", "login"],
+    "homepage": "https://cyberuslabs.com/",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Kamil Krzanowski",
+            "email": "kamilrevolve@gmail.com",
+            "homepage": "https://revolve.pro",
+            "role": "Developer"
+        }
+    ],
     "require": {
         "firebase/php-jwt": "^5.0",
         "curl/curl": "^2.2"

@@ -11,6 +11,5 @@ $cyberkey = new Cyberkey(
   '[REDIRECT_URL]'
 );
 
-$cyberkey->send_code();
-$result = $cyberkey->result;
+$result = $cyberkey->send_code();
 ```
