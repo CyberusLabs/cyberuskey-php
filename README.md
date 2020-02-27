@@ -13,7 +13,9 @@ composer require cyberuslabs/cyberkey
 ## Usage
 
 ```php
-$cyberkey = new Cyberkey(
+require_once __DIR__ . '/vendor/autoload.php';
+
+$cyberkey = new Cyberlabs\Cyberkey(
   '[CLIENT_ID]',
   '[SECRET_KEY]',
   '[REDIRECT_URL]'
