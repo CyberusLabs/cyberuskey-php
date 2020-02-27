@@ -2,7 +2,7 @@
     "name": "cyberuslabs/cyberkey",
     "type": "library",
     "description": "Server side PHP library to integrate your system with Cybeurs Key easily",
-    "keywords": ["php","cuberlabs","cyberkey","eliot pro", "login"],
+    "keywords": ["php","cyberuslabs","cyberkey","eliot pro", "login"],
     "homepage": "https://cyberuslabs.com/",
     "license": "MIT",
     "authors": [
@@ -22,7 +22,7 @@
     "prefer-stable": true,
     "autoload": {
         "psr-4": {
-            "Cyberlabs\\": "src/Cyberlabs"
+            "Cyberuslabs\\": "src/Cyberuslabs"
         }
     }
 }

@@ -1,5 +1,5 @@
 <?php 
-namespace Cyberlabs;
+namespace Cyberuslabs;
 use \Firebase\JWT\JWT;
 
 class Cyberkey {
