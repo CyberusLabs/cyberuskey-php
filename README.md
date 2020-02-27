@@ -2,6 +2,14 @@
 
 Ready to use PHP class which heavily simplify process of integration your very own CyberusKey.
 
+## Instalation 
+
+Use the dependency manager [composer](https://getcomposer.org/) to install CyberusKey.
+
+```bash
+composer require cyberuslabs/cyberkey
+```
+
 ## Usage
 
 ```php
@@ -11,5 +19,11 @@ $cyberkey = new Cyberkey(
   '[REDIRECT_URL]'
 );
 
-$result = $cyberkey->send_code();
+try {
+  $result = $cyberkey->send_code();
+
+  // $result will contain object with all  your profile information.
+} catch(Exception $e) {
+  echo 'Caught exception: ',  $e->getMessage(); 
+}
 ```

@@ -19,5 +19,10 @@
         "curl/curl": "^2.2"
     },
     "minimum-stability": "dev",
-    "prefer-stable": true
+    "prefer-stable": true,
+    "autoload": {
+        "psr-4": {
+            "Cyberlabs\\": "src/Cyberlabs"
+        }
+    }
 }

@@ -1,5 +1,5 @@
 <?php 
-require __DIR__ . '/vendor/autoload.php';
+namespace Cyberlabs;
 use \Firebase\JWT\JWT;
 
 class Cyberkey {
@@ -24,7 +24,7 @@ class Cyberkey {
   private static $public_key = "-----BEGIN PUBLIC KEY-----\nMIGeMA0GCSqGSIb3DQEBAQUAA4GMADCBiAKBgHElKnuERpCN/WcD6RtS9rKhJODM\nIdr2Y1yFrS255cOaG10CLwFPhSVK5z4HQv5/VN3GB2Ft+fbu9OZRTqdA4lHo0PB3\nKaj3yByDUdIoTHd4RmZMLSFVHKR0KAW193nI7s/pzeqDL0oFpHnRNZGUqhRbm2UK\nfHHDWKkTn/iGIV7XAgMBAAE=\n-----END PUBLIC KEY-----";
   
   /**
-  * Code receive from Cyberus API
+  * Code received from Cyberus API
   * @var string
   */
   private $code;
@@ -65,9 +65,9 @@ class Cyberkey {
       return $result;
 
     } catch(Exception $e) {
-        print($e->getMessage());
+      print($e->getMessage());
 
-        return false;
+      return false;
     }
   }
  }
