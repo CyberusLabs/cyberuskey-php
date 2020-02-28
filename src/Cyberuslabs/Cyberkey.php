@@ -23,20 +23,33 @@ class Cyberkey {
   */
   private static $public_key = "-----BEGIN PUBLIC KEY-----\nMIGeMA0GCSqGSIb3DQEBAQUAA4GMADCBiAKBgHElKnuERpCN/WcD6RtS9rKhJODM\nIdr2Y1yFrS255cOaG10CLwFPhSVK5z4HQv5/VN3GB2Ft+fbu9OZRTqdA4lHo0PB3\nKaj3yByDUdIoTHd4RmZMLSFVHKR0KAW193nI7s/pzeqDL0oFpHnRNZGUqhRbm2UK\nfHHDWKkTn/iGIV7XAgMBAAE=\n-----END PUBLIC KEY-----";
   
+    /**
+  * @var string public key
+  */
+  private static $api_address = 'https://production-api.cyberuskey.com/api/v2/tokens';
+
   /**
   * Code received from Cyberus API
   * @var string
   */
   private $code;
 
-  function __construct($client_id, $secret_key, $redirect_url) {
+  function __construct(
+    $client_id,
+    $secret_key,
+    $redirect_url,
+    $public_key,
+    $api_address
+    ) {
     $this->client_id = $client_id;
     $this->secret_key = $secret_key;
-    $this->redirect_url = $redirect_url;
+    $this->redirect_url = $redirect_url;    
+    $this->public_key = $public_key;
+    $this->api_address = $api_address;
     $this->code = isset($_GET['code']) ? $_GET['code'] : null;
   }
 
-  public function send_code() {
+  public function authenticate() {
     $token = base64_encode("{$this->client_id}:{$this->secret_key}");
     $code_data = array(
       'code' => $this->code,
@@ -52,7 +65,7 @@ class Cyberkey {
       $curl = new \Curl\Curl();
       $curl->setHeader('Authorization', 'Basic '.$token);
       $curl->setHeader('Content-Type', 'application/x-www-form-urlencoded');
-      $curl->post("https://production-api.cyberuskey.com/api/v2/tokens", $code_data);
+      $curl->post(self::$api_address, $code_data);
       
       if ($curl->error) {
         throw new Exception('Error code: '.$curl->error_code.' Message:'.$curl->error_message);
